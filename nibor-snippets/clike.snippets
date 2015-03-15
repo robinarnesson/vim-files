@@ -1,0 +1,54 @@
+priority -48
+
+snippet ifi "if, one statement"
+if (${1})
+	${2}
+endsnippet
+
+snippet if "if"
+if (${1}) {
+	${2}
+}${3}
+endsnippet
+
+snippet el "else"
+else {
+	${1}
+}${2}
+endsnippet
+
+snippet ife "if .. else"
+if (${1}) {
+	${2}
+} else {
+	${3}
+}${4}
+endsnippet
+
+snippet eli "else if"
+else if (${1}) {
+	${2}
+}${3}
+endsnippet
+
+snippet for "for (; ; )"
+for (${1}; ${2}; ${3}) {
+	${4}
+}${5}
+endsnippet
+
+snippet wh "while"
+while (${1}) {
+	${2}
+}${3}
+endsnippet
+
+snippet do "do while"
+do {
+	${2}
+} while (${1});
+endsnippet
+
+snippet t "ternary"
+(${1}) ? ${2} : ${3};${4}
+endsnippet
