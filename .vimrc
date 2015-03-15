@@ -34,6 +34,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'SirVer/ultisnips'
+Plugin 'Lokaltog/vim-easymotion'
 Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-surround'
@@ -55,8 +56,8 @@ let g:airline_theme = 'wombat'
 let g:UltiSnipsSnippetsDir='~/.vim/nibor-snippets/'
 let g:UltiSnipsSnippetDirectories=['nibor-snippets']
 let g:UltiSnipsExpandTrigger='<c-e>'
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:UltiSnipsJumpForwardTrigger='<c-d>'
+let g:UltiSnipsJumpBackwardTrigger='<c-c>'
 let g:UltiSnipsEditSplit='vertical'
 
 " set colorscheme
@@ -97,7 +98,8 @@ nmap <leader>q :q<CR>
 nmap <leader>d :Bclose<CR>
 nmap <leader>v :vsplit<CR>
 nmap <leader>s :split<CR>
-nmap <leader>, :'.<CR>
+nmap <leader>. :'.<CR>
+nmap f <leader><leader>s
 map 0 ^
 
 " buffer shortcuts
