@@ -42,7 +42,7 @@ foreach ($${1:variable} as $${2:key} => $${3:value}) {
 }
 endsnippet
 
-snippet get "get"
+snippet get "get" w
 $_GET['${1}']${2}
 endsnippet
 
@@ -54,7 +54,7 @@ snippet log "log"
 error_log(var_export(${1}, true));${2}
 endsnippet
 
-snippet post "post"
+snippet post "post" w
 $_POST['${1}']${2}
 endsnippet
 
@@ -62,7 +62,7 @@ snippet req1 "req1"
 require_once '${1:file}';${2}
 endsnippet
 
-snippet session "session"
+snippet session "session" w
 $_SESSION['${1}']${2}
 endsnippet
 
@@ -291,8 +291,12 @@ snippet inheritdoc "@inheritdoc docblock"
  */
 endsnippet
 
-snippet php "php tag"
+snippet php "php tag" w
 <?php ${1}?>
+endsnippet
+
+snippet em "empty()" w
+empty(${1})${2}
 endsnippet
 
 # :vim:ft=snippets:

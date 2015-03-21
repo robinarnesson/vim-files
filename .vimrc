@@ -1,11 +1,12 @@
-" basic
+" general
+syntax on
 set nocompatible
 set colorcolumn=101
 set number
 set showmatch
 set laststatus=2
 set statusline+=%-10.3n\
-set scrolloff=0
+set scrolloff=10
 set clipboard=unnamedplus
 set autoread
 set ruler
@@ -24,8 +25,10 @@ set nowrap
 set cursorline
 set incsearch
 set hidden
+set fileformats=unix,dos,mac
+set backspace=indent,eol,start
 
-" vundle
+" plugins
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -51,6 +54,8 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'wombat'
+let g:airline_left_sep = 'â–¶'
+let g:airline_right_sep = 'â—€'
 
 " ultisnips
 let g:UltiSnipsSnippetsDir='~/.vim/nibor-snippets/'
@@ -77,56 +82,77 @@ if has('gui_running')
   set guitablabel=%M\ %t
 endif
 
+" transform /* comment */ to // comment
+let @l = '$?\/\*a€kD/$i€kr€kb€kbg_i€kr d$'
+
+" transform /* comment */ to // Comment
+let @r = '$?\/\*lr/llvU$xxa g_ld$'
+
 " set leader
 let mapleader=','
-let g:mapleader=','
+let gmapleader=','
 
 " various shortcuts
-nmap <F2> :set hlsearch!<CR>
-nmap <F3> :NERDTreeToggle<CR>
-nmap <F4> :TagbarToggle<CR>
-nmap <F5> :TagbarOpenAutoClose<CR>/
-nmap <F6> :UltiSnipsEdit<CR>
-nmap <F7> :Ag! ""<Left>
-nmap <leader>i :e ~/.vimrc<CR>
-nmap <leader>c :e ~/.vim/colors/nibor.vim<CR>
-nmap <leader>tw :e ~/todo-work.txt<CR>
-nmap <leader>tp :e ~/todo-private.txt<CR>
-nmap <leader>x :1,100bd<CR>:q<CR>
-nmap <leader>w :w<CR>
-nmap <leader>q :q<CR>
-nmap <leader>d :Bclose<CR>
-nmap <leader>v :vsplit<CR>
-nmap <leader>s :split<CR>
-nmap <leader>. :'.<CR>
+nmap <f2> :set hlsearch!<cr>
+nmap <f3> :NERDTreeToggle<cr>
+nmap <f4> :TagbarToggle<cr>
+nmap <f5> :TagbarOpenAutoClose<cr>/
+nmap <f6> :UltiSnipsEdit<cr>
+nmap <f7> :Ag! ""<left>
+nmap <f8> :setlocal spell!<cr>
+nmap <leader>i :e ~/.vimrc<cr>
+nmap <leader>u :e ~/.vim/colors/nibor.vim<cr>
+nmap <leader>tw :e ~/todo-work.txt<cr>
+nmap <leader>tp :e ~/todo-private.txt<cr>
+nmap <leader>x :1,100bd<cr>:q<cr>
+nmap <leader>w :w<cr>
+nmap <leader>q :q<cr>
+nmap <leader>d :Bclose<cr>
+nmap <leader>v :vsplit<cr>
+nmap <leader>s :split<cr>
+nmap <leader>. :'.<cr>
+nmap <enter> o<esc>
+nmap <s-enter> O<esc>
 nmap f <leader><leader>s
-map 0 ^
+nmap 0 ^
+nmap <leader>l @l
+nmap <leader>r @r
 
 " buffer shortcuts
-nnoremap <leader>b :bp<CR>
-nnoremap <leader>f :bn<CR>
-nnoremap <leader>1 :1b<CR>
-nnoremap <leader>2 :2b<CR>
-nnoremap <leader>3 :3b<CR>
-nnoremap <leader>4 :4b<CR>
-nnoremap <leader>5 :5b<CR>
-nnoremap <leader>6 :6b<CR>
-nnoremap <leader>7 :7b<CR>
-nnoremap <leader>8 :8b<CR>
-nnoremap <leader>9 :9b<CR>
-nnoremap <leader>0 :10b<CR>
+nnoremap <leader>p :bp<cr>
+nnoremap <leader>f :bn<cr>
+nnoremap <leader>1 :1b<cr>
+nnoremap <leader>2 :2b<cr>
+nnoremap <leader>3 :3b<cr>
+nnoremap <leader>4 :4b<cr>
+nnoremap <leader>5 :5b<cr>
+nnoremap <leader>6 :6b<cr>
+nnoremap <leader>7 :7b<cr>
+nnoremap <leader>8 :8b<cr>
+nnoremap <leader>9 :9b<cr>
+nnoremap <leader>0 :10b<cr>
 
 " move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-h> <c-w>h
+map <c-l> <c-w>l
 
 " move lines using ALT+[jk] or Command+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+nmap <m-j> mz:m+<cr>`z
+nmap <m-k> mz:m-2<cr>`z
+vmap <m-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <m-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+" disable arrow keys in normal mode
+nmap <up> <nop>
+nmap <down> <nop>
+nmap <left> <nop>
+nmap <right> <nop>
+
+" fullscreen
+map <silent> <f11>
+\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<cr>
 
 " return to last edit position when opening files
 autocmd BufReadPost *
