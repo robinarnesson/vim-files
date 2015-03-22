@@ -80,13 +80,19 @@ if has('gui_running')
   set guioptions-=e
   set t_Co=256
   set guitablabel=%M\ %t
-endif
+endi
 
 " transform /* comment */ to // comment
-let @l = '$?\/\*a€kD/$i€kr€kb€kbg_i€kr d$'
+let @l = '$?\/\*lr/$xxa g_ld$'
 
 " transform /* comment */ to // Comment
-let @r = '$?\/\*lr/llvU$xxa g_ld$'
+let @k = '$?\/\*lr/llvU$xxa g_ld$'
+
+" replace word in block
+let @w = '"tyiw[{V%::s/\V\<t\>//gc€kl€kl€kl'
+
+" replace word in file
+let @a = '"tyiw:%s/\V\<t\>//gc€kl€kl€kl'
 
 " set leader
 let mapleader=','
@@ -116,7 +122,9 @@ nmap <s-enter> O<esc>
 nmap f <leader><leader>s
 nmap 0 ^
 nmap <leader>l @l
-nmap <leader>r @r
+nmap <leader>k @k
+nmap gr @w
+nmap gR @a
 
 " buffer shortcuts
 nnoremap <leader>p :bp<cr>
