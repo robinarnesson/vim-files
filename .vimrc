@@ -80,7 +80,7 @@ if has('gui_running')
   set guioptions-=e
   set t_Co=256
   set guitablabel=%M\ %t
-endi
+endif
 
 " transform /* comment */ to // comment
 let @l = '$?\/\*lr/$xxa g_ld$'
