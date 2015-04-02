@@ -28,6 +28,12 @@ set hidden
 set fileformats=unix,dos,mac
 set backspace=indent,eol,start
 
+" wildmenu
+set wildmenu
+set wildmode=list:longest,full
+set wildignore=*.o,*~,*.pyc
+set wildignore+=.git\*,.hg\*,.svn\*
+
 " plugins
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -49,6 +55,7 @@ filetype plugin indent on
 
 " ctrlp
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_working_path_mode = 'w'
 
 " airline
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -81,6 +88,9 @@ if has('gui_running')
   set t_Co=256
   set guitablabel=%M\ %t
 endif
+
+" transform gt("") to ""
+let @m = '$?gtxxds)'
 
 " transform /* comment */ to // comment
 let @l = '$?\/\*lr/$xxa g_ld$'
@@ -125,6 +135,7 @@ nmap <leader>l @l
 nmap <leader>k @k
 nmap gr @w
 nmap gR @a
+nmap <leader>m @m
 
 " buffer shortcuts
 nnoremap <leader>p :bp<cr>
@@ -160,10 +171,10 @@ nmap <right> <nop>
 
 " fullscreen
 map <silent> <f11>
-\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<cr>
+  \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<cr>
 
 " return to last edit position when opening files
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
