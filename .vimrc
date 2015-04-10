@@ -55,14 +55,17 @@ filetype plugin indent on
 
 " ctrlp
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_working_path_mode = 'w'
+let g:ctrlp_working_path_mode='w'
+
+" nerdtree
+let NERDTreeIgnore=['\.o$','\~$']
 
 " airline
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'wombat'
-let g:airline_left_sep = 'â–¶'
-let g:airline_right_sep = 'â—€'
+let g:airline#extensions#tabline#buffer_nr_show=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='wombat'
+let g:airline_left_sep='â–¶'
+let g:airline_right_sep='â—€'
 
 " ultisnips
 let g:UltiSnipsSnippetsDir='~/.vim/nibor-snippets/'
@@ -90,19 +93,19 @@ if has('gui_running')
 endif
 
 " transform gt("") to ""
-let @m = '$?gtxxds)'
+let @m='$?gtxxds)'
 
 " transform /* comment */ to // comment
-let @l = '$?\/\*lr/$xxa g_ld$'
+let @l='$?\/\*lr/$xxa g_ld$'
 
 " transform /* comment */ to // Comment
-let @k = '$?\/\*lr/llvU$xxa g_ld$'
+let @k='$?\/\*lr/llvU$xxa g_ld$'
 
 " replace word in block
-let @w = '"tyiw[{V%::s/\V\<t\>//gc€kl€kl€kl'
+let @w='"tyiw[{V%::s/\V\<t\>//gc€kl€kl€kl'
 
 " replace word in file
-let @a = '"tyiw:%s/\V\<t\>//gc€kl€kl€kl'
+let @a='"tyiw:%s/\V\<t\>//gc€kl€kl€kl'
 
 " set leader
 let mapleader=','
@@ -117,10 +120,10 @@ nmap <f6> :UltiSnipsEdit<cr>
 nmap <f7> :Ag! ""<left>
 nmap <f8> :setlocal spell!<cr>
 nmap <leader>i :e ~/.vimrc<cr>
-nmap <leader>u :e ~/.vim/colors/nibor.vim<cr>
+nmap <leader>z :e ~/.vim/colors/nibor.vim<cr>
 nmap <leader>tw :e ~/todo-work.txt<cr>
 nmap <leader>tp :e ~/todo-private.txt<cr>
-nmap <leader>x :1,100bd<cr>:q<cr>
+nmap <leader>x :1,1000bd<cr>:q<cr>
 nmap <leader>w :w<cr>
 nmap <leader>q :q<cr>
 nmap <leader>d :Bclose<cr>
@@ -136,6 +139,8 @@ nmap <leader>k @k
 nmap gr @w
 nmap gR @a
 nmap <leader>m @m
+nmap <leader>y yiw
+nmap <leader>u viwp
 
 " buffer shortcuts
 nnoremap <leader>p :bp<cr>
