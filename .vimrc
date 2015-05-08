@@ -1,4 +1,4 @@
-" general
+" General
 syntax on
 set nocompatible
 set colorcolumn=101
@@ -6,7 +6,7 @@ set number
 set showmatch
 set laststatus=2
 set statusline+=%-10.3n\
-set scrolloff=10
+set scrolloff=0
 set clipboard=unnamedplus
 set autoread
 set ruler
@@ -28,13 +28,13 @@ set hidden
 set fileformats=unix,dos,mac
 set backspace=indent,eol,start
 
-" wildmenu
+" Wildmenu
 set wildmenu
 set wildmode=list:longest,full
 set wildignore=*.o,*~,*.pyc
 set wildignore+=.git\*,.hg\*,.svn\*
 
-" plugins
+" Plugins
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -50,22 +50,15 @@ Plugin 'tpope/vim-surround'
 Plugin 'rking/ag.vim'
 Plugin 'bling/vim-airline'
 Plugin 'rbgrouleff/bclose.vim'
+Plugin 'Yggdroot/indentLine'
 call vundle#end()
 filetype plugin indent on
-
-" ctrlp
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_working_path_mode='w'
 
 " nerdtree
 let NERDTreeIgnore=['\.o$','\~$']
 
-" airline
-let g:airline#extensions#tabline#buffer_nr_show=1
-let g:airline#extensions#tabline#enabled=1
-let g:airline_theme='wombat'
-let g:airline_left_sep='â–¶'
-let g:airline_right_sep='â—€'
+" tcomment_vim
+call tcomment#DefineType('c','// %s')
 
 " ultisnips
 let g:UltiSnipsSnippetsDir='~/.vim/nibor-snippets/'
@@ -75,13 +68,24 @@ let g:UltiSnipsJumpForwardTrigger='<c-d>'
 let g:UltiSnipsJumpBackwardTrigger='<c-c>'
 let g:UltiSnipsEditSplit='vertical'
 
-" set colorscheme
+" ctrlp.vim
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_working_path_mode='w'
+
+" vim-airline
+let g:airline#extensions#tabline#buffer_nr_show=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='wombat'
+let g:airline_left_sep='â–¶'
+let g:airline_right_sep='â—€'
+
+" Set colorscheme
 try
   colorscheme nibor
 catch
 endtry
 
-" set gui options
+" Set gui options
 if has('gui_running')
   set guioptions-=T
   set guioptions-=m
@@ -92,30 +96,30 @@ if has('gui_running')
   set guitablabel=%M\ %t
 endif
 
-" transform gt("") to ""
+" Transform gt("") to ""
 let @m='$?gtxxds)'
 
-" transform /* comment */ to // comment
+" Transform /* comment */ to // comment
 let @l='$?\/\*lr/$xxa g_ld$'
 
-" transform /* comment */ to // Comment
+" Transform /* comment */ to // Comment
 let @k='$?\/\*lr/llvU$xxa g_ld$'
 
-" replace word in block
+" Replace word in block
 let @w='"tyiw[{V%::s/\V\<t\>//gc€kl€kl€kl'
 
-" replace word in file
+" Replace word in file
 let @a='"tyiw:%s/\V\<t\>//gc€kl€kl€kl'
 
-" set leader
+" Set leader
 let mapleader=','
 let gmapleader=','
 
-" various shortcuts
+" Various shortcuts
 nmap <f2> :set hlsearch!<cr>
 nmap <f3> :NERDTreeToggle<cr>
 nmap <f4> :TagbarToggle<cr>
-nmap <f5> :TagbarOpenAutoClose<cr>/
+nmap <f5> :TagbarOpenAutoClose<cr>
 nmap <f6> :UltiSnipsEdit<cr>
 nmap <f7> :Ag! ""<left>
 nmap <f8> :setlocal spell!<cr>
@@ -140,9 +144,9 @@ nmap gr @w
 nmap gR @a
 nmap <leader>m @m
 nmap <leader>y yiw
-nmap <leader>u viwp
+nmap <leader>u viwpyiw
 
-" buffer shortcuts
+" Buffer shortcuts
 nnoremap <leader>p :bp<cr>
 nnoremap <leader>f :bn<cr>
 nnoremap <leader>1 :1b<cr>
@@ -156,29 +160,29 @@ nnoremap <leader>8 :8b<cr>
 nnoremap <leader>9 :9b<cr>
 nnoremap <leader>0 :10b<cr>
 
-" move between windows
+" Move between windows
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-h> <c-w>h
 map <c-l> <c-w>l
 
-" move lines using ALT+[jk] or Command+[jk] on mac
+" Move lines using ALT+[jk] or Command+[jk] on mac
 nmap <m-j> mz:m+<cr>`z
 nmap <m-k> mz:m-2<cr>`z
 vmap <m-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <m-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-" disable arrow keys in normal mode
+" Disable arrow keys in normal mode
 nmap <up> <nop>
 nmap <down> <nop>
 nmap <left> <nop>
 nmap <right> <nop>
 
-" fullscreen
+" Fullscreen
 map <silent> <f11>
   \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<cr>
 
-" return to last edit position when opening files
+" Return to last edit position when opening files
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal! g`\"" |
