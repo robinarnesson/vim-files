@@ -22,11 +22,15 @@ set autoindent
 set smartindent
 set viminfo^=%
 set nowrap
-set cursorline
+" set cursorline
 set incsearch
 set hidden
 set fileformats=unix,dos,mac
 set backspace=indent,eol,start
+" set undofile
+set undodir=~/.vim/undo//
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
 
 " Wildmenu
 set wildmenu
@@ -51,8 +55,15 @@ Plugin 'rking/ag.vim'
 Plugin 'bling/vim-airline'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'Yggdroot/indentLine'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on
+
+" vim-gitgutter
+let g:gitgutter_map_keys = 0
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 
 " nerdtree
 let NERDTreeIgnore=['\.o$','\~$']
