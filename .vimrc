@@ -131,10 +131,10 @@ let @w='"tyiw[{V%::s/\V\<t\>//gc€kl€kl€kl'
 " Replace word in file
 let @a='"tyiw:%s/\V\<t\>//gc€kl€kl€kl'
 
-" Add curly brackets to one-statement-if
-let @t='A {jo€kb}k'
+" Add curly brackets to one-statement-block
+let @t='A {jo}k'
 
-" Remove curly brackets from one-statement-if
+" Remove curly brackets from one-statement-block
 let @r='A€kb€kbjjddk'
 
 " Function keys
@@ -223,8 +223,8 @@ autocmd BufReadPost *
 
 " Show where cursor is
 function! CursorPing()
-    set cursorline cursorcolumn
-    redraw
-    sleep 50m
-    set nocursorline nocursorcolumn
+  set cursorline cursorcolumn
+  redraw
+  sleep 50m
+  set nocursorline nocursorcolumn
 endfunction
