@@ -42,10 +42,6 @@ foreach ($${1:variable} as $${2:key} => $${3:value}) {
 }
 endsnippet
 
-snippet get "get" w
-$_GET['${1}']${2}
-endsnippet
-
 snippet inc "inc"
 include '${1:file}';${2}
 endsnippet
@@ -54,16 +50,40 @@ snippet log "log"
 error_log(var_export(${1}, true));${2}
 endsnippet
 
-snippet post "post" w
+snippet get "$_GET['']" w
+$_GET['${1}']${2}
+endsnippet
+
+snippet post "$_POST['']" w
 $_POST['${1}']${2}
+endsnippet
+
+snippet session "$_SESSION['']" w
+$_SESSION['${1}']${2}
+endsnippet
+
+snippet cookie "$_COOKIE['']" w
+$_COOKIE['${1}']${2}
+endsnippet
+
+snippet server "$_SERVER['']" w
+$_SERVER['${1}']${2}
+endsnippet
+
+snippet request "$_REQUEST['']" w
+$_REQUEST['${1}']${2}
+endsnippet
+
+snippet files "$_FILES['']" w
+$_FILES['${1}']${2}
+endsnippet
+
+snippet env "$_ENV['']" w
+$_ENV['${1}']${2}
 endsnippet
 
 snippet req1 "req1"
 require_once '${1:file}';${2}
-endsnippet
-
-snippet session "session" w
-$_SESSION['${1}']${2}
 endsnippet
 
 snippet var "var"

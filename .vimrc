@@ -22,12 +22,13 @@ set autoindent
 set smartindent
 set viminfo^=%
 set nowrap
-" set cursorline
+set nocursorline
+set nocursorcolumn
 set incsearch
 set hidden
 set fileformats=unix,dos,mac
 set backspace=indent,eol,start
-" set undofile
+set noundofile
 set undodir=~/.vim/undo//
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
@@ -43,7 +44,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'SirVer/ultisnips'
@@ -59,6 +60,14 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on
+
+" indentLine
+let g:indentLine_char = '|'
+
+" neocomplete.vim
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " vim-gitgutter
 let g:gitgutter_map_keys = 0
@@ -122,11 +131,13 @@ let @w='"tyiw[{V%::s/\V\<t\>//gc€kl€kl€kl'
 " Replace word in file
 let @a='"tyiw:%s/\V\<t\>//gc€kl€kl€kl'
 
-" Set leader
-let mapleader=','
-let gmapleader=','
+" Add curly brackets to one-statement-if
+let @t='A {jo€kb}k'
 
-" Various shortcuts
+" Remove curly brackets from one-statement-if
+let @r='A€kb€kbjjddk'
+
+" Function keys
 nmap <f2> :set hlsearch!<cr>
 nmap <f3> :NERDTreeToggle<cr>
 nmap <f4> :TagbarToggle<cr>
@@ -134,6 +145,16 @@ nmap <f5> :TagbarOpenAutoClose<cr>
 nmap <f6> :UltiSnipsEdit<cr>
 nmap <f7> :Ag! ""<left>
 nmap <f8> :setlocal spell!<cr>
+nmap <f9> :set shiftwidth=2 tabstop=2<cr>:IndentLinesReset<cr>
+nmap <f10> :set shiftwidth=4 tabstop=4<cr>:IndentLinesReset<cr>
+map <silent> <f11>
+  \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<cr>
+
+" Set leader
+let mapleader=','
+let gmapleader=','
+
+" Leader shortcuts
 nmap <leader>i :e ~/.vimrc<cr>
 nmap <leader>z :e ~/.vim/colors/nibor.vim<cr>
 nmap <leader>tw :e ~/todo-work.txt<cr>
@@ -145,17 +166,22 @@ nmap <leader>d :Bclose<cr>
 nmap <leader>v :vsplit<cr>
 nmap <leader>s :split<cr>
 nmap <leader>. :'.<cr>
+nmap <leader>l @l
+nmap <leader>k @k
+nmap <leader>m @m
+nmap <leader>y yiw
+nmap <leader>u viwpyiw
+nmap <leader>a @t
+nmap <leader>r @r
+
+" Various shortcuts
 nmap <enter> o<esc>
 nmap <s-enter> O<esc>
 nmap f <leader><leader>s
 nmap 0 ^
-nmap <leader>l @l
-nmap <leader>k @k
 nmap gr @w
 nmap gR @a
-nmap <leader>m @m
-nmap <leader>y yiw
-nmap <leader>u viwpyiw
+nmap <C-Space> :call CursorPing()<CR>
 
 " Buffer shortcuts
 nnoremap <leader>p :bp<cr>
@@ -189,12 +215,16 @@ nmap <down> <nop>
 nmap <left> <nop>
 nmap <right> <nop>
 
-" Fullscreen
-map <silent> <f11>
-  \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<cr>
-
 " Return to last edit position when opening files
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal! g`\"" |
   \ endif
+
+" Show where cursor is
+function! CursorPing()
+    set cursorline cursorcolumn
+    redraw
+    sleep 50m
+    set nocursorline nocursorcolumn
+endfunction

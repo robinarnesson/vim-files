@@ -50,40 +50,40 @@ do {
 } while (${1});
 endsnippet
 
-snippet ty "ternary" w
-(${1}) ? ${2} : ${3};${4}
-endsnippet
-
-snippet ts "ternary for concat" w
-((${1}) ? ${2} : ${3})${4}
-endsnippet
-
 snippet doc "doxy doc"
 /**
  * ${1}
  */
 endsnippet
 
-snippet q "single quote" w
+snippet tt "ternary" w
+(${1}) ? ${2} : ${3};${4}
+endsnippet
+
+snippet tc "ternary for concat" w
+((${1}) ? ${2} : ${3})${4}
+endsnippet
+
+snippet 1 "single quote" i
 '${1}'${2}
 endsnippet
 
-snippet w "double quote" w
+snippet 2 "double quote" i
 "${1}"${2}
 endsnippet
 
-snippet e "parentheses" w
-(${1})${2}
-endsnippet
-
-snippet r "brackets" w
+snippet 3 "brackets" i
 [${1}]${2}
 endsnippet
 
-snippet t "curly brackets" w
-{${1}}${2}
+snippet 4 "brackets with single quote" i
+['${1}']${2}
 endsnippet
 
-snippet y "brackets with single quote" w
-['${1}']${2}
+snippet 5 "parentheses" i
+(${1})${2}
+endsnippet
+
+snippet 6 "curly brackets" i
+{${1}}${2}
 endsnippet
