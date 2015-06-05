@@ -1,45 +1,46 @@
 " General
 syntax on
-set nocompatible
-set colorcolumn=101
-set number
-set showmatch
-set laststatus=2
-set statusline+=%-10.3n\
-set scrolloff=0
-set clipboard=unnamedplus
-set autoread
-set ruler
-set hlsearch
-set encoding=utf8
-set listchars=tab:>-,trail:~
-set list
-set expandtab
-set smarttab
-set shiftwidth=2
-set tabstop=2
 set autoindent
-set smartindent
-set viminfo^=%
-set nowrap
-set nocursorline
-set nocursorcolumn
-set incsearch
-set hidden
-set fileformats=unix,dos,mac
+set autoread
 set backspace=indent,eol,start
-set noundofile
-set undodir=~/.vim/undo//
 set backupdir=~/.vim/backup//
+set clipboard=unnamedplus
+set colorcolumn=101
+set cursorline
 set directory=~/.vim/swap//
-
-" Wildmenu
+set encoding=utf8
+set expandtab
+set fileformats=unix,dos,mac
+set nohidden
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set lazyredraw
+set list
+set listchars=tab:>-,trail:~
+set nocompatible
+set nocursorcolumn
+set noerrorbells
+set noundofile
+set novisualbell
+set nowrap
+set number
+set ruler
+set scrolloff=0
+set shiftwidth=2
+set showmatch
+set smartindent
+set smarttab
+set statusline+=%-10.3n\
+set tabstop=2
+set undodir=~/.vim/undo//
+set viminfo^=%
+set wildignore+=.git\*,.hg\*,.svn\*
+set wildignore=*.o,*~,*.pyc
 set wildmenu
 set wildmode=list:longest,full
-set wildignore=*.o,*~,*.pyc
-set wildignore+=.git\*,.hg\*,.svn\*
 
-" Plugins
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -52,12 +53,14 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-surround'
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'bling/vim-airline'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'powerline/powerline'
+Plugin 'godlygeek/tabular'
 call vundle#end()
 filetype plugin indent on
 
@@ -70,9 +73,13 @@ let g:neocomplete#enable_smart_case = 1
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " vim-gitgutter
-let g:gitgutter_map_keys = 0
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
+let g:gitgutter_map_keys=0
+let g:gitgutter_realtime=0
+let g:gitgutter_eager=0
+let g:gitgutter_max_signs=2000
+
+" tagbar
+let g:tagbar_map_showproto = "<right>"
 
 " nerdtree
 let NERDTreeIgnore=['\.o$','\~$']
@@ -95,9 +102,9 @@ let g:ctrlp_working_path_mode='w'
 " vim-airline
 let g:airline#extensions#tabline#buffer_nr_show=1
 let g:airline#extensions#tabline#enabled=1
-let g:airline_theme='wombat'
-let g:airline_left_sep='â–¶'
-let g:airline_right_sep='â—€'
+let g:airline_theme = 'wombat'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 " Set colorscheme
 try
@@ -140,10 +147,10 @@ let @r='A€kb€kbjjddk'
 " Function keys
 nmap <f2> :set hlsearch!<cr>
 nmap <f3> :NERDTreeToggle<cr>
-nmap <f4> :TagbarToggle<cr>
+map <f4> :Tabularize /
 nmap <f5> :TagbarOpenAutoClose<cr>
 nmap <f6> :UltiSnipsEdit<cr>
-nmap <f7> :Ag! ""<left>
+nmap <f7> :Ack ""<left>
 nmap <f8> :setlocal spell!<cr>
 nmap <f9> :set shiftwidth=2 tabstop=2<cr>:IndentLinesReset<cr>
 nmap <f10> :set shiftwidth=4 tabstop=4<cr>:IndentLinesReset<cr>
@@ -154,17 +161,16 @@ map <silent> <f11>
 let mapleader=','
 let gmapleader=','
 
-" Leader shortcuts
+" Various leader shortcuts
 nmap <leader>i :e ~/.vimrc<cr>
-nmap <leader>z :e ~/.vim/colors/nibor.vim<cr>
 nmap <leader>tw :e ~/todo-work.txt<cr>
 nmap <leader>tp :e ~/todo-private.txt<cr>
 nmap <leader>x :1,1000bd<cr>:q<cr>
 nmap <leader>w :w<cr>
 nmap <leader>q :q<cr>
-nmap <leader>d :Bclose<cr>
-nmap <leader>v :vsplit<cr>
-nmap <leader>s :split<cr>
+nmap <leader>c :Bclose<cr>
+nmap <leader>s :vsplit<cr>
+nmap <leader>hs :split<cr>
 nmap <leader>. :'.<cr>
 nmap <leader>l @l
 nmap <leader>k @k
@@ -173,15 +179,8 @@ nmap <leader>y yiw
 nmap <leader>u viwpyiw
 nmap <leader>a @t
 nmap <leader>r @r
-
-" Various shortcuts
-nmap <enter> o<esc>
-nmap <s-enter> O<esc>
 nmap f <leader><leader>s
-nmap 0 ^
-nmap gr @w
-nmap gR @a
-nmap <C-Space> :call CursorPing()<CR>
+nmap <leader>z :tabnew<cr>
 
 " Buffer shortcuts
 nnoremap <leader>p :bp<cr>
@@ -197,6 +196,31 @@ nnoremap <leader>8 :8b<cr>
 nnoremap <leader>9 :9b<cr>
 nnoremap <leader>0 :10b<cr>
 
+" Only use reg 0 for paste
+nnoremap p "0p
+nnoremap P "0P
+vnoremap p "0p
+vnoremap P "0P
+
+" Various shortcuts
+nmap <enter> o<esc>
+nmap <s-enter> O<esc>
+nmap 0 ^
+nmap gr @w
+nmap gR @a
+nmap <space> :set noignorecase<cr>/
+nmap <c-space> :set ignorecase<cr>/
+
+" Disable arrow keys
+nmap <up> <nop>
+nmap <down> <nop>
+nmap <left> <nop>
+nmap <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+
 " Move between windows
 map <c-j> <c-w>j
 map <c-k> <c-w>k
@@ -209,17 +233,14 @@ nmap <m-k> mz:m-2<cr>`z
 vmap <m-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <m-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-" Disable arrow keys in normal mode
-nmap <up> <nop>
-nmap <down> <nop>
-nmap <left> <nop>
-nmap <right> <nop>
-
 " Return to last edit position when opening files
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal! g`\"" |
   \ endif
+
+" Copy clipboard to reg 0 on focus
+autocmd FocusGained * let @0=@+
 
 " Show where cursor is
 function! CursorPing()
