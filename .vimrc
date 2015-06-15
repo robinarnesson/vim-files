@@ -11,7 +11,7 @@ set directory=~/.vim/swap//
 set encoding=utf8
 set expandtab
 set fileformats=unix,dos,mac
-set nohidden
+set hidden
 set hlsearch
 set ignorecase
 set incsearch
@@ -46,6 +46,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'mjbrownie/swapit'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'SirVer/ultisnips'
@@ -61,8 +62,16 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'powerline/powerline'
 Plugin 'godlygeek/tabular'
+Plugin 'xolox/vim-misc'
+" Plugin 'xolox/vim-easytags'
 call vundle#end()
 filetype plugin indent on
+
+" vim-easytags
+" let g:easytags_events=['BufWritePost']
+" let g:easytags_include_members=1
+" let g:easytags_by_filetype="~/.vim/vimtags/"
+" let g:easytags_auto_highlight=0
 
 " indentLine
 let g:indentLine_char = '|'
@@ -106,12 +115,6 @@ let g:airline_theme = 'wombat'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-" Set colorscheme
-try
-  colorscheme nibor
-catch
-endtry
-
 " Set gui options
 if has('gui_running')
   set guioptions-=T
@@ -122,6 +125,13 @@ if has('gui_running')
   set t_Co=256
   set guitablabel=%M\ %t
 endif
+
+" Set colorscheme
+try
+  colorscheme phoenix
+  PhoenixGreen
+catch
+endtry
 
 " Transform gt("") to ""
 let @m='$?gtxxds)'
@@ -179,8 +189,9 @@ nmap <leader>y yiw
 nmap <leader>u viwpyiw
 nmap <leader>a @t
 nmap <leader>r @r
-nmap f <leader><leader>s
 nmap <leader>z :tabnew<cr>
+nmap <leader>d <c-]>
+nmap <tab> <leader><leader>s
 
 " Buffer shortcuts
 nnoremap <leader>p :bp<cr>
@@ -210,16 +221,18 @@ nmap gr @w
 nmap gR @a
 nmap <space> :set noignorecase<cr>/
 nmap <c-space> :set ignorecase<cr>/
+nmap s :TComment<cr>
+vmap s :TComment<cr>
+nmap t <c-a>
+imap <c-space> <c-x><c-o>
 
-" Disable arrow keys
-nmap <up> <nop>
-nmap <down> <nop>
-nmap <left> <nop>
-nmap <right> <nop>
+" Set arrow keys
 imap <up> <nop>
 imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
+nmap + :vertical resize +1<cr>
+nmap - :vertical resize -1<cr>
 
 " Move between windows
 map <c-j> <c-w>j
