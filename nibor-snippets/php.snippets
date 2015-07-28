@@ -82,7 +82,7 @@ snippet env "$_ENV['']" w
 $_ENV['${1}']${2}
 endsnippet
 
-snippet req1 "req1"
+snippet reqo "require once"
 require_once '${1:file}';${2}
 endsnippet
 
@@ -311,7 +311,15 @@ snippet inheritdoc "@inheritdoc docblock"
  */
 endsnippet
 
-snippet php "php tag" w
+snippet php "php tag"
+<?php
+
+${1}
+
+?>
+endsnippet
+
+snippet phpi "php tag, one line" w
 <?php ${1}?>
 endsnippet
 

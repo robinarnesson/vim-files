@@ -63,15 +63,15 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'powerline/powerline'
 Plugin 'godlygeek/tabular'
 Plugin 'xolox/vim-misc'
-" Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-easytags'
 call vundle#end()
 filetype plugin indent on
 
 " vim-easytags
-" let g:easytags_events=['BufWritePost']
-" let g:easytags_include_members=1
-" let g:easytags_by_filetype="~/.vim/vimtags/"
-" let g:easytags_auto_highlight=0
+let g:easytags_events=['BufWritePost']
+let g:easytags_include_members=1
+let g:easytags_by_filetype="~/.vim/vimtags/"
+let g:easytags_auto_highlight=0
 
 " indentLine
 let g:indentLine_char = '|'
@@ -173,8 +173,8 @@ let gmapleader=','
 
 " Various leader shortcuts
 nmap <leader>i :e ~/.vimrc<cr>
-nmap <leader>tw :e ~/todo-work.txt<cr>
-nmap <leader>tp :e ~/todo-private.txt<cr>
+nmap <leader>tw :e ~/remote-files/tw<cr>
+nmap <leader>tp :e ~/remote-files/tp<cr>
 nmap <leader>x :1,1000bd<cr>:q<cr>
 nmap <leader>w :w<cr>
 nmap <leader>q :q<cr>
@@ -192,6 +192,8 @@ nmap <leader>r @r
 nmap <leader>z :tabnew<cr>
 nmap <leader>d <c-]>
 nmap <tab> <leader><leader>s
+nmap <leader><f1> a<C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR><Esc>
+imap <leader><f1> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 
 " Buffer shortcuts
 nnoremap <leader>p :bp<cr>
@@ -223,7 +225,6 @@ nmap <space> :set noignorecase<cr>/
 nmap <c-space> :set ignorecase<cr>/
 nmap s :TComment<cr>
 vmap s :TComment<cr>
-nmap t <c-a>
 imap <c-space> <c-x><c-o>
 
 " Set arrow keys
